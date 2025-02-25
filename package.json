@@ -1,0 +1,34 @@
+{
+  "name": "mockp-system",
+  "version": "1.0.0",
+  "author": "Matheus D.",
+  "license": "MIT",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "apps/*",
+      "libs/*"
+    ],
+    "installConfig.hoistingLimits": [
+      "**/@nestjs",
+      "**/@nestjs/**"
+    ]
+  },
+  "scripts": {
+    "format": "prettier  \"{apps,libs}/**/*.{ts,tsx,js,json}\" --ignore-path .gitignore",
+    "format:check": "yarn format --check",
+    "format:write": "yarn format --write",
+    "tsc": "yarn nx run-many -t tsc",
+    "lint": "yarn nx run-many -t lint",
+    "build": "yarn nx run-many -t build",
+    "validate": "yarn format:write && yarn tsc && yarn lint && yarn build",
+    "prepare": "husky install",
+    "cloc": "npx cloc --exclude-dir=node_modules,dist,build,yarn.lock,package.json,generated.tsx,.next,.nsx ."
+  },
+  "devDependencies": {
+    "husky": "^8.0.0",
+    "nx": "20.4.6",
+    "prettier": "^3.0.0",
+    "typescript": "^5.7.3"
+  }
+}
