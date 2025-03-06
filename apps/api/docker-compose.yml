@@ -2,16 +2,16 @@ version: '3.8'
 
 services:
   db:
-    container_name: mockp-system_db
+    container_name: library-system_db
     image: postgres
     restart: always
     ports:
       - 2001:5432
     environment:
-      POSTGRES_USER: mockp
-      POSTGRES_DB: mockp_db
-      POSTGRES_PASSWORD: mockp
+      POSTGRES_USER: library
+      POSTGRES_DB: library_system_db
+      POSTGRES_PASSWORD: library
     volumes:
-      - db_data_mockp_system:/var/lib/postgresql/data
+      - db_data_library_system:/var/lib/postgresql/data
 volumes:
-  db_data_mockp:
+  db_data_library_system:
