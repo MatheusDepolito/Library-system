@@ -14,58 +14,58 @@ datasource db {
 }
 
 model Publisher {
-    id        String   @unique
-    timestamp DateTime
+  id        String   @unique
+  timestamp DateTime
 
-    name     String
-    location String
-    contact  String
+  name     String
+  location String
+  contact  String
 
-    books Book[]
+  books Book[]
 }
 
 model Book {
-    id        String   @unique
-    timestamp DateTime
+  id        String   @unique
+  timestamp DateTime
 
-    name String
+  name String
 
-    publisher   Publisher @relation(fields: [publisherId], references: [id])
-    publisherId String
+  publisher   Publisher @relation(fields: [publisherId], references: [id])
+  publisherId String
 
-    bookItems BookItem[]
-    chapters   ChapterItem[]
+  bookItems BookItem[]
+  chapters  ChapterItem[]
 }
 
 model ChapterItem {
-    id        Int      @id @default(autoincrement())
-    timestamp DateTime
+  id        Int      @id @default(autoincrement())
+  timestamp DateTime
 
-    name   String
-    pagesCount Int
+  name       String
+  pagesCount Int
 
-    Book   Book @relation(fields: [bookId], references: [id])
-    bookId String
+  Book   Book   @relation(fields: [bookId], references: [id])
+  bookId String
 }
 
 model BookItem {
-    id        String   @unique
-    timestamp DateTime
+  id        String   @unique
+  timestamp DateTime
 
-    book   Book @relation(fields: [bookId], references: [id])
-    bookId String
+  book   Book   @relation(fields: [bookId], references: [id])
+  bookId String
 
-    status       BookStatus
-    transactions Transaction[]
+  status       BookStatus
+  transactions Transaction[]
 }
 
 model Transaction {
-    id        Int      @id @default(autoincrement())
-    timestamp DateTime
+  id        Int      @id @default(autoincrement())
+  timestamp DateTime
 
-    bookItemId String
-    bookItem   BookItem   @relation(fields: [bookItemId], references: [id])
-    status        BookStatus
+  bookItemId String
+  bookItem   BookItem   @relation(fields: [bookItemId], references: [id])
+  status     BookStatus
 }
 
 enum BookStatus {
