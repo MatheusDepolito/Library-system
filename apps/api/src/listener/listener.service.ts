@@ -23,8 +23,8 @@ export class ListenerService implements OnModuleInit, OnModuleDestroy {
   }
 
   initializeWebSocketProvider() {
-    const infuraWssUrl = `https://eth-sepolia.g.alchemy.com/v2/${process.env.INFURA_KEY}`;
-    this.provider = new ethers.InfuraWebSocketProvider(infuraWssUrl);
+    const infuraWssUrl = `wss://eth-sepolia.g.alchemy.com/v2/${process.env.INFURA_KEY}`;
+    this.provider = new ethers.WebSocketProvider(infuraWssUrl);
 
     this.contract = LibraryChain__factory.connect(
       contractAddress,
@@ -46,7 +46,10 @@ export class ListenerService implements OnModuleInit, OnModuleDestroy {
           });
         },
       );
-    } catch (error) {}
+      console.log('Event: PublisherRegistered Listening...');
+    } catch (error) {
+      console.error('Event: BookCreated: Listener setup failed.', error);
+    }
   }
 
   cleanup() {
